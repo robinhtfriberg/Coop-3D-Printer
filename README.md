@@ -23,8 +23,10 @@ hardware), `annotate.py` (inserts the macro calls),
 travel limits).
 
 ## Known limits 
-
-- **Footprint is partly measured, partly assumed.** `MOUNT_WIDTH_X` and
+- Need to combine add in the MACRO.cfg file to both printer.cfg files. Add in
+  [include macros.cfg] at the top of config file.
+  
+- Footprint is partly measured, partly assumed. `MOUNT_WIDTH_X` and
   `MOUNT_DEPTH_Y` need to be more accurately measured with calipers
    (dimensions were changed last minute during assembly so just double check).
    `PARK_CLEARANCE` up to 95mm: at an 80mm-deep mount, a parked toolhead and one printing at the
@@ -33,10 +35,10 @@ travel limits).
   including step 4's alarm thresholds is derived from these, so
   re-check the hardware and measure the park zones.
 
-- **The toolheads are modelled as boxes, not meshes.** A fan duct or a
+- The toolheads are modelled as boxes. A fan duct or a
   cable chain that sticks out beyond `MOUNT_*` is invisible.
 
-- **Concurrency needs the two heads to have a larger seperation**
+- Concurrency needs the two heads to have a larger seperation
   With a seam across the middle of the bed, toolhead1's mount reaches
   40mm past its own material and toolhead2's reaches 40mm back, so the
   two conflict almost everywhere and the planner falls back to a strict
@@ -44,13 +46,13 @@ travel limits).
   time saving of a second toolhead only appears when the seam gives each
   head its own region of the bed.
 
-- **Timing model.** Both the planner and replay use straight-line
+- Timing model. Both the planner and replay use straight-line
   distance/feedrate timing (no acceleration/jerk/look-ahead).
   Real print timing will differ, which is why checkpoints are
   progress-indexed rather than wall-clock-scheduled but the predicted
   conflict windows the planner reasons about are still only as good as
   that timing estimate.
 
-- **Orchestrator untested against live Moonraker,** 
+- Orchestrator untested against live Moonraker,
  Built against the API, not tested
  against real hardware in this environment.
